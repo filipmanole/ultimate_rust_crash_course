@@ -1,17 +1,17 @@
-use ding_machine;
+use ding_machine::{print_difference, print_array, ding, on_off, print_distance};
 
 fn main() {
     let coords: (f32, f32) = (6.3, 15.0);
-    ding_machine::print_difference(coords.0, coords.1);
+    print_difference(coords.0, coords.1);
 
     let coords_arr: [f32; 2] = [coords.0, coords.1];
-    ding_machine::print_array(coords_arr);
+    print_array(coords_arr);
 
     let series = [1, 1, 2, 3, 5, 8, 13];
-    ding_machine::ding(series[series.len() - 1]);
+    ding(series[series.len() - 1]);
 
     let mess = ([3, 2], 3.14, [(false, -3), (true, -100)], 5, "candy");
-    ding_machine::on_off(mess.2[1].0);
+    on_off(mess.2[1].0);
 
-    ding_machine::print_distance(coords);
+    print_distance(coords);
 }
