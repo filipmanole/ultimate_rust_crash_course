@@ -7,7 +7,7 @@ pub fn inspect(s: &String) {
 }
 
 pub fn change(s: &mut String) {
-    s.push_str("s");
+    if !s.ends_with("s") { s.push_str("s");  }
 }
 
 pub fn eat(s: String) -> bool {
@@ -17,4 +17,5 @@ pub fn eat(s: String) -> bool {
         false
     }
 }
+
 pub fn add(i1: &i32, i2: &i32) -> i32 { i1 + i2 }
