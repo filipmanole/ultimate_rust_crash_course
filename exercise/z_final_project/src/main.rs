@@ -38,16 +38,16 @@ fn main() {
     }
     let subcommand = args.remove(0);
     match subcommand.as_str() {
-        // EXAMPLE FOR CONVERSION OPERATIONS
         "blur" => {
-            if args.len() != 2 {
+            if args.len() != 3 {
                 print_usage_and_exit();
             }
+
+            let sigma = args.remove(0).parse::<f32>().expect("Could not parse sigma value...");
             let infile = args.remove(0);
             let outfile = args.remove(0);
-            // **OPTION**
-            // Improve the blur implementation -- see the blur() function below
-            blur(infile, outfile);
+            
+            blur(sigma, infile, outfile);
         }
 
         // **OPTION**
@@ -86,7 +86,7 @@ fn main() {
 
 fn print_usage_and_exit() {
     println!("USAGE (when in doubt, use a .png extension on your filenames)");
-    println!("blur INFILE OUTFILE");
+    println!("blur sigma(float) INFILE OUTFILE");
     println!("fractal OUTFILE");
     // **OPTION**
     // Print useful information about what subcommands and arguments you can use
@@ -94,14 +94,11 @@ fn print_usage_and_exit() {
     std::process::exit(-1);
 }
 
-fn blur(infile: String, outfile: String) {
-    // Here's how you open an existing image file
+fn blur(sigma: f32, infile: String, outfile: String) {
     let img = image::open(infile).expect("Failed to open INFILE.");
-    // **OPTION**
-    // Parse the blur amount (an f32) from the command-line and pass it through
-    // to this function, instead of hard-coding it to 2.0.
-    let img2 = img.blur(2.0);
-    // Here's how you save an image to a file.
+
+    let img2 = img.blur(sigma);
+
     img2.save(outfile).expect("Failed writing OUTFILE.");
 }
 
